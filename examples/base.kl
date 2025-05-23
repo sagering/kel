@@ -1,0 +1,182 @@
+import "strings"
+import "math"
+
+/// Types
+// Basic types
+int : Int = 4
+float : Float = 4.0
+string : String = "Indigo"
+// range : Range = 0..1
+any : Any = "Pila"
+
+// User defined struct types
+struct Dog {
+    name: String
+    age: Int
+    breed: String
+}
+
+// Initialize a new constant 'jimmy' with a 'Dog' instance.
+jimmy = Dog { name = "Jimmy", age = 3, breed = "Beagle" }
+
+// Arguments to struct and other initializer expressions
+// can be seperated by comma or new lines and the order of
+// arguments does not matter.
+jester = Dog {
+    breed = "Beagle"
+    name = "Jester"
+    age = 4
+}
+
+// Lists
+list : List[Int] = [1, 2, 3, 4]
+
+// Indexing into list
+last = list[3] 
+
+// Optionals
+maybe : Int? = null
+opt : Int? = 4
+
+// Oneof union type
+oneof FloatOrString {
+    Float
+    String
+}
+
+val : FloatOrString = "I am a String"
+
+// String literal types
+s : "42" = "42"
+
+// The value of a string literal type can only be the type itself.
+// Oneofs of only string literal types essentially enumerates all
+// allowed values of this type.
+oneof Colors {
+    "red"
+    "green"
+    "blue"
+    "white"
+    "black"
+}
+
+
+/// Operators
+
+// binary math operators
+a0 = 1 + 4
+a1 = 1 - 4
+a2 = 1 / 4
+a3 = 1 * 4
+
+// unary math operators
+b = -1
+
+// binary logical operators
+c0 = true || false
+c1 = true && false
+
+// unary logical operator
+d = !true
+
+// comparison operators
+e0 = 1 < 14 
+e1 = 1 <= 14
+e2 = 1 > 14
+e3 = 1 >= 14
+
+// struct field access '.'
+jimmys_age = jimmy.age
+
+// Null coalescing operator '??' to provide a default on the right hand side
+// in case the left hand side optional is null.
+another_int = maybe ?? opt ?? 0
+
+// Optional chaining operator '?.' safely accesses fields in optional structs
+// and evaluate to null if the optional is null.
+maybe_dog : Dog? = null
+opt_dog : Dog? = jimmy
+
+age = maybe_dog?.age ?? opt_dog?.age ?? 0
+
+// type test operator 'is'
+is_float = a0 is Float
+
+// type cast operator 'as'
+cast = 8.0 as Int
+
+// parenthesization of expressions
+paren = (4 - 1) * 2 + 1
+
+// ternary expression <cond> ?: <true_branch> : <false_branch>
+ternary1 = 4 < 3 ?: "4 < 3" : "4 >= 3"
+
+// ternary expressions are right associative, e.g. this...
+ternary2 = 4 < 3 ?: "4 < 3" : 4 < 5 ?: "4 < 5" : "4 >= 15"
+
+// ...is equal to this
+ternary3 = 4 < 3 ?: ("4 < 3") : (4 < 5 ?: "4 < 5" : "4 >= 5")
+
+/// Amending and templates
+
+// Amending allows you to create variations of existing
+// instances without redefining all fields.
+ayla = jimmy { breed = "German Shepherd", name = "Ayla" }
+
+// Templates simplify the creation of multiple similar objects.
+template Beagle { name: String, age: Int} = Dog {
+    name
+    age
+    breed = "Beagle"
+}
+
+beagles = [
+    Beagle { name = "Jolly", age = 5 }
+    Beagle { name = "Josephine", age = 2 }
+    Beagle { name = "Johanna", age = 8 }
+]
+
+/// Consts
+
+// const with explicit type
+explicit : Int = 4
+
+// const with inferred type
+inferred = 4
+
+/// Modules and imports
+
+// import "math"
+// from "strings" import { contains }
+// from "basic_types.kl" import { int }
+
+/// Function calls
+
+yes = strings.contains("hi", "i")
+min = math.min
+mo = min(2, 1)
+
+/// For and If generators
+
+beagle_names = [
+    for beagle in beagles {
+        beagle.name
+    }
+]
+
+beagle_puppies = [
+    for beagle in beagles {
+        if beagle.age <= 1 {
+            beagle.name
+        }
+    }
+]
+
+/// String interpolation
+
+your_name = "Caleb"
+interpolated = $"Hi there {your_name}"
+
+/// Comments
+
+// This is a comment.

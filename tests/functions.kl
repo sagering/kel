@@ -1,0 +1,3 @@
+func magic() = 42
+
+val = magic()

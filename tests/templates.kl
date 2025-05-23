@@ -1,0 +1,11 @@
+struct S {
+    field1: Int
+    field2: String
+}
+
+template T { field2: String } = S {
+    field1 = 0
+    field2
+}
+    
+t = T { field2 = "Field2" }

@@ -1,0 +1,12 @@
+import "math"
+from "strings" import { contains }
+from "basic_types.kl" import { int }
+from "custom_types.kl" import { MyStruct }
+
+my_int = int
+
+my_struct = MyStruct {
+    field1 = 0
+    field2 = 0.0
+}
+
