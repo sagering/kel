@@ -1,0 +1,6 @@
+import "math"
+from "strings" import { contains }
+
+min = math.min(1, 2)
+contains_hello = contains("Hello world!", "Hello")
+

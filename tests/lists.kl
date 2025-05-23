@@ -1,0 +1,8 @@
+l1 : List[Int] = [ 1, 2, 3 ]
+
+l2 : List[String] = [
+    "Hello"
+    "World"
+]
+
+l3 = [ 1, 42.0, "String" ]

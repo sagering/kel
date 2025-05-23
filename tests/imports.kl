@@ -1,0 +1,6 @@
+import "math"
+from "strings" import { contains }
+from "basic_types.kl" import { int }
+
+my_int = int
+

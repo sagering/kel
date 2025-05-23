@@ -1,0 +1,4 @@
+s1 = "String"
+s2 = $"interpolation: 42 * 42 = {42 * 42}"
+s3 : "S1" = "S1"
+s4 : String = s3

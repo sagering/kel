@@ -1,0 +1,17 @@
+int = 42.0 as Int
+
+struct S1 {
+    field1: String
+    field2: String
+}
+
+struct S2 {
+    field1: String
+}
+
+s1 = S1 { 
+    field1 = "field1"
+    field2 = "field2"
+}
+
+s2 : S2 = s1 as S2

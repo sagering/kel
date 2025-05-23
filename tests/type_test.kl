@@ -1,0 +1,5 @@
+float_strings = [
+    if 1.2 is Float {
+        "1.2"
+    }
+]

@@ -1,0 +1,16 @@
+oneof MyOneof1 {
+    Float
+    String
+}
+
+val1 : MyOneof1 = 0.1
+val2 : MyOneof1 = "11"
+
+oneof MyOneof2 {
+    "RED"
+    "GREEN"
+    "BLUE"
+}
+
+val3 : MyOneof2 = "RED"
+val4 : MyOneof2 = "GREEN"

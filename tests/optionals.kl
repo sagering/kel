@@ -1,0 +1,12 @@
+option1 : Float? = null
+option2 : Int? = 42
+
+default_float = option1 ?? 0.0
+default_int = option2 ?? 0
+
+struct S {
+    field: Int
+}
+
+s : S? = null
+maybe = s?.field

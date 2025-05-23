@@ -1,0 +1,4 @@
+int : Int = 42
+float : Float = 42.0
+string : String = "42"
+any : Any = "42"

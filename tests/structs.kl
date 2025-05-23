@@ -1,0 +1,25 @@
+struct Strukt1 {
+    field1: String
+    field2: Int
+}
+
+struct Strukt2 {
+    field1: String,
+    field2: Int,
+}
+
+struct Strukt3 {
+    field1: String, field2: Int,
+}
+
+struct Strukt4 {
+    field1: String = "", field2: Int = 0,
+}
+
+s1 = Strukt1 {
+    field1 = "Field1"
+    field2 = 2
+}
+
+s2 = Strukt1 { field1 = "Field1", field2 = 2 }
+s3 = Strukt4 {}
