@@ -35,4 +35,5 @@ pub enum EvaluationError {
     IndexOutOfRange,
     ItemNotFound(String),
     TypeCastError(String),
+    FunctionNotFound(String),
 }

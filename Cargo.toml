@@ -9,3 +9,8 @@ path = "src/lib.rs"
 
 [dependencies]
 regex = "1"
+
+
+[dev-dependencies]
+
+clap = {version = "4.5.30", features = ["derive"]}

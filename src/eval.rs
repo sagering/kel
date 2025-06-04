@@ -1,8 +1,8 @@
 use crate::{
     checker::{
-        Context, Expression, FunctionId, ListElement, Module, Stack, StringInterpolationPart, Type,
-        TypeId, Value, TYPE_ID_BOOL, TYPE_ID_FLOAT, TYPE_ID_INT, TYPE_ID_RANGE, TYPE_ID_STRING,
-        TYPE_ID_TYPE, TYPE_ID_UNKNOWN,
+        Context, Expression, FunctionId, ListElement, ModuleId, Stack, StringInterpolationPart,
+        Type, TypeId, Value, TYPE_ID_BOOL, TYPE_ID_FLOAT, TYPE_ID_INT, TYPE_ID_RANGE,
+        TYPE_ID_STRING, TYPE_ID_TYPE, TYPE_ID_UNKNOWN,
     },
     common::{Error, EvaluationError, Result},
     parser::Operator,
@@ -319,31 +319,44 @@ impl Value {
     }
 }
 
-pub fn evaluate_module(stack: &mut Stack, context: &Context, module: &Module) -> Result<Value> {
-    // 1. Initialize all constants
+pub fn initialize_stack(stack: &mut Stack, context: &Context) -> Result<()> {
     for konst in context.consts() {
         let value = evaluate_expression(context, stack, &konst.value)?;
         stack.push(1);
         stack.write(0, value)?;
     }
 
-    for const_id in &module.consts {
-        println!(
-            "{} = {:?}",
-            context.get_const(*const_id).name,
-            stack.read_abs(*const_id)
-        );
-    }
+    Ok(())
+}
 
-    // 2. Run main function of the module
+pub fn call_function(
+    context: &Context,
+    module_id: ModuleId,
+    function_name: &str,
+    stack: &mut Stack,
+    args: Vec<Value>,
+) -> Result<Value> {
+    let module = context.get_module(module_id);
+
     for function_id in &module.functions {
-        let f = context.get_function(*function_id);
-        if f.name == "main" {
-            return evaluate_expression(context, stack, &f.expr);
+        let function = context.get_function(*function_id);
+        if function.name != function_name {
+            continue;
         }
+
+        let arg_count = args.len();
+        for arg in args.into_iter() {
+            stack.push(1);
+            stack.write(0, arg)?;
+        }
+        let val = evaluate_expression(context, stack, &function.expr)?;
+        stack.pop(arg_count);
+        return Ok(val);
     }
 
-    Ok(Value::Null)
+    Err(Error::EvaluationError(EvaluationError::FunctionNotFound(
+        function_name.to_string(),
+    )))
 }
 
 pub fn evaluate_list_element(

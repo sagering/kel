@@ -2,6 +2,8 @@
 
 Kel is a rust-embeddable typed configuration and templating language.
 
+See [kleks.io](https://www.kleks.io) to see Kel in action.
+
 # Features
 
 - Strong Typing: Includes basic types, user-defined structs, lists, optionals, and union types.
@@ -266,11 +268,11 @@ interpolated = $"Hi there {your_name}"
 
 # Backlog
 
-- WASM playground
 - wildcard imports, e.g. 'from "mylib.kl" import { * }'
 - default arguments in templates
 - improved ergonomics around variant checking for oneofs
 - better handling of "index out of rang" errors
+- non-null assertations '!!'
 
 
 # License

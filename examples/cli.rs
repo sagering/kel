@@ -1,6 +1,6 @@
 use clap::Parser;
 use kl::checker::{Compiler, Context, Scope, Stack};
-use kl::eval::evaluate_module;
+use kl::eval::initialize_stack;
 use kl::format_error;
 use kl::modules::lists;
 use kl::modules::math;
@@ -93,8 +93,18 @@ fn main() {
         .get_or_compile_module(&mut context, &mut scope, &eval_path)
         .and_then(|module_id| {
             let mut stack = Stack::new();
+            initialize_stack(&mut stack, &mut context)?;
             let module = context.get_module(module_id);
-            evaluate_module(&mut stack, &context, &module)
+
+            for const_id in &module.consts {
+                println!(
+                    "{} = {:?}",
+                    context.get_const(*const_id).name,
+                    stack.read_abs(*const_id)
+                );
+            }
+
+            Ok(())
         });
 
     let elapsed_time = start_time.elapsed(); // Calculate elapsed time

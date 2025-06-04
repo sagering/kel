@@ -1,5 +1,5 @@
 use kl::checker::{Compiler, Context, Scope, Stack};
-use kl::eval::evaluate_module;
+use kl::eval::initialize_stack;
 use kl::format_error;
 use kl::modules::lists;
 use kl::modules::math;
@@ -44,10 +44,9 @@ fn run(file_path: &str, include: &[&str]) -> String {
 
     let result = compiler
         .get_or_compile_module(&mut context, &mut scope, &file_path)
-        .and_then(|module_id| {
+        .and_then(|_| {
             let mut stack = Stack::new();
-            let module = context.get_module(module_id);
-            evaluate_module(&mut stack, &context, &module)
+            initialize_stack(&mut stack, &mut context)
         });
 
     match result {
