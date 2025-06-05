@@ -1,6 +1,6 @@
 # Kel
 
-Kel is a rust-embeddable typed configuration and templating language.
+An embeddable, statically typed configuration and templating language for Rust.
 
 See [kleks.io](https://www.kleks.io) to see Kel in action.
 
