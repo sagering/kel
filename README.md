@@ -1,5 +1,8 @@
 # Kel
 
+![Tests](https://github.com/sagering/kel/actions/workflows/test.yml/badge.svg)
+
+
 An embeddable, statically typed configuration and templating language for Rust.
 
 See [kleks.io](https://www.kleks.io) to see Kel in action.
